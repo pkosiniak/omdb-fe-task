@@ -13,7 +13,8 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
   display: flex;
   flex-direction: column;

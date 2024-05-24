@@ -10,3 +10,4 @@ export * from './Score';
 export * from './Title';
 // common exports
 export * from './Page';
+export * from './Loader';

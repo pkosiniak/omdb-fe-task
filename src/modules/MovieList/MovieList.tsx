@@ -5,6 +5,7 @@ import { UsePaginationProps } from '@mui/material/usePagination/usePagination';
 import { movieListRequestAction, movieListSelector } from '@/store/movieList';
 import { useSubject } from '@/utils/hooks';
 import { MovieCard } from '../MovieCard';
+import { Loader } from '../Loader';
 import { CardList, Wrapper } from './components';
 
 type Props = {};
@@ -12,6 +13,7 @@ type Props = {};
 export const MovieList: FC<Props> = ({}) => {
   const movieList = useSelector(movieListSelector.movieList);
   const paginationCount = useSelector(movieListSelector.movieListTotalResults);
+  const isLoading = useSelector(movieListSelector.movieListStatus);
   const dispatch = useDispatch();
   const pageChangeEvent$ = useSubject<number>();
 
@@ -31,6 +33,7 @@ export const MovieList: FC<Props> = ({}) => {
 
   return (
     <Wrapper>
+      <Loader isLoading={isLoading} />
       <CardList>{movieList ? movieList.map((movie, index) => <MovieCard {...movie} key={index} />) : null}</CardList>
       {count ? <Pagination count={count} onChange={handlePageChange} /> : null}
     </Wrapper>
