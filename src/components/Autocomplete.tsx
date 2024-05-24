@@ -20,6 +20,7 @@ type Props = {
 
 const StyledAutocomplete = styled(MuiAutocomplete)(({ theme: { breakpoints } }) => ({
   minWidth: 250,
+  maxWidth: 500,
   [breakpoints.up('sm')]: { minWidth: 400 },
 }));
 

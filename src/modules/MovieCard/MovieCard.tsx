@@ -1,6 +1,7 @@
 import { Button, Typography } from '@mui/material';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { IMovie } from '@/utils/omdbTypes';
 import { Card, Description, Wrapper } from './components';
 
@@ -26,7 +27,9 @@ export const MovieCard: FC<Props> = ({ Poster, Title, Type, Year, imdbID }) => {
         <Wrapper>
           <Typography variant='caption'>{t(Type)}</Typography>
 
-          <Button variant='text'>{t('details')}</Button>
+          <Link to={imdbID}>
+            <Button variant='text'>{t('details')}</Button>
+          </Link>
         </Wrapper>
       </Description>
     </Card>

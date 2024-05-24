@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { SearchBox } from './modules';
-import { MovieList } from './modules/MovieList';
+import React, { FC } from 'react';
+import { Provider } from 'react-redux';
+import { ThemeProvider as MuiThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from './store';
+import { darkTheme } from './styles/theme';
+import { AppRouter } from './pages/AppRouter';
 
-function App() {
+const App: FC = () => {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-
-        <SearchBox />
-
-        <MovieList />
-        {/* {state?.[0] && <MovieCard {...state[0]} />} */}
-        {/* <p>{JSON.stringify(state)}</p> */}
-        <a className='App-link' href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.StrictMode>
+      <Provider store={store}>
+        <MuiThemeProvider theme={darkTheme}>
+          <ThemeProvider theme={darkTheme}>
+            <BrowserRouter>
+              <AppRouter />
+            </BrowserRouter>
+          </ThemeProvider>
+        </MuiThemeProvider>
+      </Provider>
+    </React.StrictMode>
   );
 }
 
