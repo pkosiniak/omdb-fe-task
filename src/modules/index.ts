@@ -11,3 +11,4 @@ export * from './Title';
 // common exports
 export * from './Page';
 export * from './Loader';
+export * from './ErrorDisplay';

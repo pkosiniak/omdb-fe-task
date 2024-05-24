@@ -34,6 +34,7 @@ export const movieListSlice = createSlice({
     movieList: state => state.data?.Search,
     movieListStatus: state => state.isLoading,
     movieListTotalResults: state => state.data?.totalResults,
+    movieListError: state => (state.error as ErrorResponse)?.Error,
   },
 });
 

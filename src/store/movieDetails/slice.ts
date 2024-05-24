@@ -33,6 +33,7 @@ export const movieDetailsSlice = createSlice({
   selectors: {
     movieDetails: state => state.data,
     movieDetailsStatus: state => state.isLoading,
+    movieDetailsError: state => (state.error as ErrorResponse)?.Error,
   },
 });
 

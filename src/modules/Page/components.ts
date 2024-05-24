@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { Button } from '@mui/material';
 
 export const PageContainer = styled.div`
   background-color: #282c34;
@@ -24,8 +23,4 @@ export const Main = styled.main`
 
 export const Footer = styled.footer`
   padding: 20px;
-`;
-
-export const BackButton = styled(Button)`
-  align-items: center;
 `;

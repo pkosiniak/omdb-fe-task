@@ -6,6 +6,7 @@ import { movieListRequestAction, movieListSelector } from '@/store/movieList';
 import { useSubject } from '@/utils/hooks';
 import { MovieCard } from '../MovieCard';
 import { Loader } from '../Loader';
+import { ErrorDisplay } from '../ErrorDisplay';
 import { CardList, Wrapper } from './components';
 
 type Props = {};
@@ -14,6 +15,8 @@ export const MovieList: FC<Props> = ({}) => {
   const movieList = useSelector(movieListSelector.movieList);
   const paginationCount = useSelector(movieListSelector.movieListTotalResults);
   const isLoading = useSelector(movieListSelector.movieListStatus);
+  const errorMessage = useSelector(movieListSelector.movieListError);
+
   const dispatch = useDispatch();
   const pageChangeEvent$ = useSubject<number>();
 
@@ -33,9 +36,11 @@ export const MovieList: FC<Props> = ({}) => {
 
   return (
     <Wrapper>
+      <ErrorDisplay error={errorMessage}>
+        <CardList>{movieList ? movieList.map((movie, index) => <MovieCard {...movie} key={index} />) : null}</CardList>
+        {count ? <Pagination count={count} onChange={handlePageChange} /> : null}
+      </ErrorDisplay>
       <Loader isLoading={isLoading} />
-      <CardList>{movieList ? movieList.map((movie, index) => <MovieCard {...movie} key={index} />) : null}</CardList>
-      {count ? <Pagination count={count} onChange={handlePageChange} /> : null}
     </Wrapper>
   );
 };
