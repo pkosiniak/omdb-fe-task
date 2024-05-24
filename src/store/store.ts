@@ -3,20 +3,21 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import reduxLogger from 'redux-logger';
 import { getMovieListEpic, movieListSlice } from './movieList';
 import { getMovieDetailsEpic, movieDetailsSlice } from './movieDetails';
+import { updateAutocompleteHistoryEpic, autocompleteHistorySlice } from './autocompleteHistory';
 
-// TODO: proper typings
+// TODO: types
 // type RootActions = {};
 // export type RootState = {} ;
 
 const makeStore = () => {
-  // TODO:
+  // TODO: types
   // const epicMiddleware = createEpicMiddleware<RootActions, RootActions, any>();
   const epicMiddleware = createEpicMiddleware<any, any, any>();
 
-  // TODO:
-  const rootEpic = combineEpics<any, any, any>(getMovieListEpic, getMovieDetailsEpic);
+  // TODO: types
+  const rootEpic = combineEpics<any, any, any>(getMovieListEpic, getMovieDetailsEpic, updateAutocompleteHistoryEpic);
 
-  const rootSlices = combineSlices(movieListSlice, movieDetailsSlice);
+  const rootSlices = combineSlices(movieListSlice, movieDetailsSlice, autocompleteHistorySlice);
 
   const store = configureStore({
     reducer: rootSlices,

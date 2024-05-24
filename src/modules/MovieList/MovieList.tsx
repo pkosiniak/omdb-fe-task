@@ -36,11 +36,11 @@ export const MovieList: FC<Props> = ({}) => {
 
   return (
     <Wrapper>
+      <Loader isLoading={isLoading} />
       <ErrorDisplay error={errorMessage}>
         <CardList>{movieList ? movieList.map((movie, index) => <MovieCard {...movie} key={index} />) : null}</CardList>
         {count ? <Pagination count={count} onChange={handlePageChange} /> : null}
       </ErrorDisplay>
-      <Loader isLoading={isLoading} />
     </Wrapper>
   );
 };

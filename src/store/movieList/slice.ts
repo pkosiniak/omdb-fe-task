@@ -32,6 +32,7 @@ export const movieListSlice = createSlice({
   },
   selectors: {
     movieList: state => state.data?.Search,
+    movieListSearchParam: state => state.params?.search,
     movieListStatus: state => state.isLoading,
     movieListTotalResults: state => state.data?.totalResults,
     movieListError: state => (state.error as ErrorResponse)?.Error,

@@ -1,12 +1,13 @@
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import { debounceTime, filter } from 'rxjs';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Autocomplete, InputNumber } from '@/components';
 import { useSubject } from '@/utils/hooks';
-import { movieListRequestAction } from '@/store/movieList';
+import { movieListRequestAction, movieListSelector } from '@/store/movieList';
 import { MovieType } from '@/utils/omdbTypes';
 import { All, Item, Select } from '@/components/Select';
+import { autocompleteHistorySelector } from '@/store/autocompleteHistory/slice';
 import { FilterWrapper, Wrapper } from './components';
 
 const DEBOUNCE_TIME = 1000;
@@ -16,8 +17,9 @@ const MAX_YEAR = CURRENT_YEAR;
 
 type Props = {};
 
-
 export const SearchBox: FC<Props> = ({}) => {
+  const search = useSelector(movieListSelector.movieListSearchParam);
+  const options = useSelector(autocompleteHistorySelector.history);
   const inputEvent$ = useSubject<string>();
   const movieTypeEvent$ = useSubject<MovieType | 'all'>();
   const yearEvent$ = useSubject<number>();
@@ -78,7 +80,7 @@ export const SearchBox: FC<Props> = ({}) => {
 
   return (
     <Wrapper>
-      <Autocomplete onChange={handleInputChange} />
+      <Autocomplete onChange={handleInputChange} initValue={search} options={options} />
 
       <FilterWrapper>
         <Select label={t('movieType')} items={movieTypes} onChange={handleSelectChange} />

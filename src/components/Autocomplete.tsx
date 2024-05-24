@@ -6,17 +6,8 @@ import {
   styled,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-
-export type AutocompleteOption = {
-  value: string;
-  label: string;
-};
-
-export type AutocompleteProps = MuiAutocompleteProps<AutocompleteOption, undefined, undefined, undefined>;
-
-type Props = {
-  onChange: (value: string) => void;
-};
+import { useDerivedState } from '@/utils/hooks';
+import { AutocompleteOption } from '@/utils/types';
 
 const StyledAutocomplete = styled(MuiAutocomplete)(({ theme: { breakpoints } }) => ({
   minWidth: 250,
@@ -24,12 +15,23 @@ const StyledAutocomplete = styled(MuiAutocomplete)(({ theme: { breakpoints } }) 
   [breakpoints.up('sm')]: { minWidth: 400 },
 }));
 
-export const Autocomplete: FC<Props> = ({ onChange }) => {
+export type AutocompleteProps = MuiAutocompleteProps<AutocompleteOption, undefined, undefined, undefined>;
+
+type Props = {
+  onChange: (value: string) => void;
+  initValue?: string;
+  options: AutocompleteOption[];
+};
+
+export const Autocomplete: FC<Props> = ({ initValue, onChange, options }) => {
   const { t } = useTranslation();
 
+  const [value, setValue] = useDerivedState(initValue);
+
   const handleInputChange = useCallback<Required<AutocompleteProps>['onInputChange']>(
-    (_, value) => {
-      onChange(value);
+    (_, next) => {
+      setValue(next);
+      onChange(next);
     },
     [onChange]
   );
@@ -37,9 +39,11 @@ export const Autocomplete: FC<Props> = ({ onChange }) => {
   return (
     <StyledAutocomplete
       disablePortal
-      options={[]} // TODO: make options from searched list or change component
+      value={value ?? ''}
+      options={options}
       onInputChange={handleInputChange}
       renderInput={params => <TextField {...params} label={t('search')} />}
+      isOptionEqualToValue={() => true} // hack to remove console.warn
     />
   );
 };

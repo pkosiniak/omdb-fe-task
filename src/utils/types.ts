@@ -17,3 +17,8 @@ export type ActionType<P, T extends string = string> = Action<T> & { payload: P}
 export type SliceActionType<A extends Record<string, ActionCreatorWithPayload<P>>, P = any> = ReturnType<A[keyof A]>;
 
 export type SetStateCallback<T> = Dispatch<SetStateAction<T>>;
+
+export type AutocompleteOption = {
+  value: string;
+  label: string;
+};
