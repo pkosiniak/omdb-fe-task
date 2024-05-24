@@ -4,19 +4,19 @@ import { of } from 'rxjs';
 import { OMDbErrorResponse, OMDbSearchParams, OMDbSearchResponse, OMDbResponse } from '@/utils/omdbTypes';
 import { ErrorResponse } from '@/utils/types';
 import { httpClient } from '@/utils/utils';
-import { MovieListActionType, movieListAction } from './slice';
+import { MOVIE_LIST, MovieListActionType, MovieListState, movieListAction } from './slice';
 
 const getList = (params?: OMDbSearchParams) => {
-  if (!params)
+  if (!params || !params.search)
     return of({ Response: OMDbResponse.FAILURE, Error: 'No empty params', validationError: true } as ErrorResponse);
 
   const { search, type, page, year } = params;
 
   const reduced = {
     s: search,
-    t: type,
+    type,
     y: year,
-    p: page,
+    page,
   };
 
   return httpClient()
@@ -30,11 +30,11 @@ const getList = (params?: OMDbSearchParams) => {
     );
 };
 
-export const getMovieListEpic: Epic<MovieListActionType, MovieListActionType> = action$ =>
+export const getMovieListEpic: Epic<MovieListActionType, MovieListActionType, MovieListState> = (action$, state$) =>
   action$.pipe(
     ofType(movieListAction.request.type),
-    mergeMap(action =>
-      getList(action.payload).pipe(
+    mergeMap(() =>
+      getList(state$.value[MOVIE_LIST].params).pipe(
         map(result => {
           if (result.Response !== OMDbResponse.SUCCESS) return movieListAction.failure(result);
           return movieListAction.success(result);

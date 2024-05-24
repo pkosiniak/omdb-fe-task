@@ -1,24 +1,20 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { movieListAction, movieListSelector } from './store/movieList';
+import { SearchBox } from './modules';
+import { MovieList } from './modules/MovieList';
 
 function App() {
-  const dispatch = useDispatch();
-  const state = useSelector(movieListSelector.movieList);
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
   return (
     <div className='App'>
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
-        <button onClick={() => dispatch(movieListAction.request({ search: 'man' }))}>test</button>
 
-        <p>{JSON.stringify(state)}</p>
+        <SearchBox />
+
+        <MovieList />
+        {/* {state?.[0] && <MovieCard {...state[0]} />} */}
+        {/* <p>{JSON.stringify(state)}</p> */}
         <a className='App-link' href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
           Learn React
         </a>

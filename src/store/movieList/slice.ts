@@ -1,11 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { ActionCreatorWithPayload, createSlice } from '@reduxjs/toolkit';
 import { OMDbSearchParams, OMDbSearchResponse } from '@/utils/omdbTypes';
-import { ActionType, ErrorResponse, FetchState } from '@/utils/types';
+import { ErrorResponse, FetchState, SliceActionType } from '@/utils/types';
 
 const initialState: FetchState<OMDbSearchResponse, OMDbSearchParams> = {
   data: undefined,
   error: undefined,
   isLoading: undefined,
+  // params: { search: 'man' }, // FIXME: testing only
   params: undefined,
 };
 
@@ -17,7 +18,7 @@ export const movieListSlice = createSlice({
   reducers: {
     request: (state, action) => ({
       ...state,
-      params: action.payload as OMDbSearchParams,
+      params: { ...state.params, ...action.payload } as OMDbSearchParams,
       error: undefined,
       isLoading: true,
     }),
@@ -32,15 +33,21 @@ export const movieListSlice = createSlice({
   selectors: {
     movieList: state => state.data?.Search,
     movieListStatus: state => state.isLoading,
+    movieListTotalResults: state => state.data?.totalResults,
   },
 });
 
 export const movieListAction = movieListSlice.actions;
-export type MovieListActionType = ActionType<
+export type MovieListActionType = SliceActionType<
   typeof movieListAction,
   OMDbSearchParams | OMDbSearchResponse | ErrorResponse
 >;
+export const movieListRequestAction: ActionCreatorWithPayload<
+  Partial<OMDbSearchParams>,
+  'MOVIE_LIST/request'
+> = movieListSlice.actions.request;
 
 export const movieListSelector = movieListSlice.selectors;
 
 export const movieListReducer = movieListSlice.reducer;
+export type MovieListState = { [MOVIE_LIST]: ReturnType<typeof movieListReducer> };

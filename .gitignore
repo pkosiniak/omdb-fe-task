@@ -23,6 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 samples.json
+*.note*
 
 # local settings
 .vscode
