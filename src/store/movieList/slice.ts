@@ -1,8 +1,8 @@
 import { ActionCreatorWithPayload, createSlice } from '@reduxjs/toolkit';
-import { OMDbSearchParams, OMDbSearchResponse } from '@/utils/omdbTypes';
+import { OMDbSearchParamsMap, OMDbSearchResponse } from '@/utils/omdbTypes';
 import { ErrorResponse, FetchState, SliceActionType } from '@/utils/types';
 
-const initialState: FetchState<OMDbSearchResponse, OMDbSearchParams> = {
+const initialState: FetchState<OMDbSearchResponse, OMDbSearchParamsMap> = {
   data: undefined,
   error: undefined,
   isLoading: undefined,
@@ -18,7 +18,7 @@ export const movieListSlice = createSlice({
   reducers: {
     request: (state, action) => ({
       ...state,
-      params: { ...state.params, ...action.payload } as OMDbSearchParams,
+      params: { ...state.params, ...action.payload } as OMDbSearchParamsMap,
       error: undefined,
       isLoading: true,
     }),
@@ -40,10 +40,10 @@ export const movieListSlice = createSlice({
 export const movieListAction = movieListSlice.actions;
 export type MovieListActionType = SliceActionType<
   typeof movieListAction,
-  OMDbSearchParams | OMDbSearchResponse | ErrorResponse
+  OMDbSearchParamsMap | OMDbSearchResponse | ErrorResponse
 >;
 export const movieListRequestAction: ActionCreatorWithPayload<
-  Partial<OMDbSearchParams>,
+  Partial<OMDbSearchParamsMap>,
   'MOVIE_LIST/request'
 > = movieListSlice.actions.request;
 

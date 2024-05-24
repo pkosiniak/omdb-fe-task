@@ -1,4 +1,5 @@
 export * from './Autocomplete';
-export * from './FlexBox';
+export * from './Boxes';
 export * from './Select';
 export * from './InputNumber';
+export * from './RatingBox';
