@@ -21,3 +21,7 @@ export const Rating = styled(MuiRating)`
 export const ScoreWrapper = styled(FlexBox)`
   gap: ${({ theme }) => theme.spacing(1)};
 `;
+
+export const Column = styled(FlexBox)`
+  flex-direction: column;
+`;
