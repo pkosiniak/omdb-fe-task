@@ -14,4 +14,4 @@ const SectionBox = styled(Box)`
 `;
 
 // TODO: replace any with proper type
-export const Section: FC<any> = props => <SectionBox {...props} component={'section'}/>;
+export const Section: FC<any> = props => <SectionBox {...props} component={'section'} />;

@@ -1,5 +1,5 @@
 import { Button, Typography } from '@mui/material';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { IMovie } from '@/utils/omdbTypes';

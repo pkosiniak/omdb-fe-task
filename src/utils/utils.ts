@@ -18,6 +18,7 @@ export const httpClient = () => ({
 });
 
 export const logger = (val: any) => {
+  // eslint-disable-next-line no-console
   console.log(val);
   return val;
 };

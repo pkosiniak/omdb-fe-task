@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { FlexBox } from '@/components';
 
-
 export const Wrapper = styled(FlexBox)`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(1)};

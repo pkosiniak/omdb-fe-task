@@ -1,1 +1,1 @@
-export * from './Awards'
+export * from './Awards';

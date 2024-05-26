@@ -21,7 +21,6 @@ const App: FC = () => {
       </Provider>
     </React.StrictMode>
   );
-}
+};
 
 export default App;
-

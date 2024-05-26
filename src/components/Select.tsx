@@ -8,7 +8,7 @@ const styles: SxProps = {
     opacity: '1 !important',
     position: 'relative',
     top: -6,
-    color: '#ffffffb3'
+    color: '#ffffffb3',
   },
 };
 

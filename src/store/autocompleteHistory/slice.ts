@@ -20,8 +20,8 @@ export const autocompleteHistorySlice = createSlice({
     noUpdate: (state, _) => state,
   },
   selectors: {
-    history: state => state.history
-  }
+    history: state => state.history,
+  },
 });
 
 export const autocompleteHistoryAction = autocompleteHistorySlice.actions;

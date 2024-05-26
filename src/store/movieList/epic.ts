@@ -8,15 +8,9 @@ import {
   OMDbResponse,
   OMDbSearchParams,
 } from '@/utils/omdbTypes';
-import { AutocompleteOption, ErrorResponse } from '@/utils/types';
+import { ErrorResponse } from '@/utils/types';
 import { httpClient } from '@/utils/utils';
 import { MOVIE_LIST, MovieListActionType, MovieListState, movieListAction } from './slice';
-import {
-  AUTOCOMPLETE_HISTORY,
-  AutocompleteHistoryAction,
-  AutocompleteHistoryState,
-  autocompleteHistoryAction,
-} from '../autocompleteHistory/slice';
 
 const getList = (params?: OMDbSearchParamsMap) => {
   if (!params || !params.search)

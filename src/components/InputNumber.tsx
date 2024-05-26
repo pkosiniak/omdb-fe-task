@@ -10,12 +10,11 @@ type Props = {
 };
 
 export const InputNumber: FC<Props> = ({ label, min, max, defaultValue, onChange }) => {
-
   const handleChange = useCallback<ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>>(
-    (event) => {
-      onChange(parseInt(event.target.value))
+    event => {
+      onChange(parseInt(event.target.value));
     },
-    [onChange],
+    [onChange]
   );
 
   return (

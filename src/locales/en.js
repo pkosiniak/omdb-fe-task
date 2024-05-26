@@ -25,7 +25,7 @@ const resources = {
   production: 'Production companies',
   website: 'Website',
   back: 'Back',
-  errorOccurred: 'Error occurred'
+  errorOccurred: 'Error occurred',
 };
 
 export default resources;
