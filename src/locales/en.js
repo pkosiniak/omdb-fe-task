@@ -6,7 +6,26 @@ const resources = {
   details: 'details',
   movieType: 'Movie type',
   all: 'All',
-  year: 'Year'
+  year: 'Year',
+  imdbRating: 'IMDb rating',
+  metascore: 'Metascore',
+  director: 'Director',
+  writer: 'Writer',
+  actors: 'Actors',
+  genre: 'Genre',
+  awards: 'Awards',
+  ratings: 'Ratings',
+  details: 'Details',
+  released: 'Release date',
+  type: 'Type',
+  country: 'Countries of origin',
+  language: 'Language',
+  boxoffice: 'Box Office',
+  dvd: 'DVD release date',
+  production: 'Production companies',
+  website: 'Website',
+  back: 'Back',
+  errorOccurred: 'Error occurred'
 };
 
 export default resources;
